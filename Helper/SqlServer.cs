@@ -40,12 +40,7 @@ namespace APICatalogo.Helper
                         while (sqlReader.Read())
                         {
                             var model = new ProductModel();
-                            models.products.Add(new Product()
-                            {
-                                Price = (decimal)sqlReader["Price"],
-                                Title = (string)sqlReader["Title"],
-                                IdProduct = (int)sqlReader["Id"]
-                            });
+                            models.products.Add(new Product((string)sqlReader["Title"], (decimal)sqlReader["Price"], (int)sqlReader["Id"]));
                         }
                     }
                 }

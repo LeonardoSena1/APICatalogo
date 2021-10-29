@@ -2,6 +2,7 @@
 using APICatalogo.Helper;
 using APICatalogo.Models.Product;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,17 +22,21 @@ namespace APICatalogo.Controllers
         [HttpPost]
         public async Task<ActionResult<List<ProductModel>>> CreateProduct([FromBody] Product model)
         {
-            if (model == null)
-                return BadRequest("Produto vazio.");
+            //Valida erro Json
+            if (model.Invalid)
+            {
+                //Insert errorMenssage in List
+                var ret = new List<string>();
+                model.ValidationResult.Errors.ForEach(x => ret.Add(x.ErrorMessage));
 
-            if (!string.IsNullOrEmpty(model.Title) && model.Price > 0)
-            {
-                SqlServer.InsertProduct(model.Title, model.Price);
+                //Join in list errormenssage
+                var retorno = new Dictionary<string, string>();
+                retorno.Add("Erro: ", string.Join(", ", ret));
+
+                return BadRequest(JsonConvert.SerializeObject(retorno));
             }
-            else
-            {
-                return BadRequest("Titulo vazio ou preço zerado");
-            }
+
+            SqlServer.InsertProduct(model.Title, model.Price);
 
             return Ok("Produto inserido");
         }
@@ -39,25 +44,43 @@ namespace APICatalogo.Controllers
         [HttpPut]
         public async Task<ActionResult<List<ProductModel>>> UpdateProduct([FromBody] Product model)
         {
-            if (model == null)
-                return BadRequest("Produto vazio.");
+            //Valida erro Json
+            if (model.Invalid)
+            {
+                //Insert errorMenssage in List
+                var ret = new List<string>();
+                model.ValidationResult.Errors.ForEach(x => ret.Add(x.ErrorMessage));
 
-            if (!string.IsNullOrEmpty(model.Title) && model.Price > 0)
-            {
-                SqlServer.UpdateProduct(model.Title, model.Price, model.IdProduct);
+                //Join in list errormenssage
+                var retorno = new Dictionary<string, string>();
+                retorno.Add("Erro: ", string.Join(", ", ret));
+
+                return BadRequest(JsonConvert.SerializeObject(retorno));
             }
-            else
-            {
-                return BadRequest("Titulo vazio ou preço zerado");
-            }
+
+            SqlServer.UpdateProduct(model.Title, model.Price, model.IdProduct);
 
             return Ok("Produto Atualizado");
         }
 
         [HttpDelete]
-        public async Task<ActionResult<List<ProductModel>>> DelteProduct(int Id)
+        public async Task<ActionResult<List<ProductModel>>> DelteProduct([FromBody] Product model)
         {
-            SqlServer.DeleteProduct(Id);
+            //Valida erro Json
+            if (model.Invalid)
+            {
+                //Insert errorMenssage in List
+                var ret = new List<string>();
+                model.ValidationResult.Errors.ForEach(x => ret.Add(x.ErrorMessage));
+
+                //Join in list errormenssage
+                var retorno = new Dictionary<string, string>();
+                retorno.Add("Erro: ", string.Join(", ", ret));
+
+                return BadRequest(JsonConvert.SerializeObject(retorno));
+            }
+
+            SqlServer.DeleteProduct(model.IdProduct);
 
             return Ok("Produto Deletado");
         }

@@ -11,8 +11,10 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCoreRateLimit" Version="3.2.2" />
+    <PackageReference Include="FluentValidation" Version="10.3.4" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
 
