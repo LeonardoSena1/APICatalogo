@@ -48,6 +48,14 @@ namespace APICatalogo
             // configuration (resolvers, counter key builders)
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                    builder.SetIsOriginAllowed(_ => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,7 +86,9 @@ namespace APICatalogo
                 context.Response.Headers.Add("Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
                 await next();
             });
-            
+
+            app.UseCors("CorsPolicy");
+
             #endregion
 
             app.UseRouting();
