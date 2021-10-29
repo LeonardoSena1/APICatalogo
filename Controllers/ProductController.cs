@@ -10,8 +10,8 @@ namespace APICatalogo.Controllers
 {
     [ApiKey]
     [ApiController]
-    [Route("[controller]")]
-    public class HomeController : ControllerBase
+    [Route("[controller]/v1/api")] 
+    public class ProductController : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<ProductModel>> GetProduct()
