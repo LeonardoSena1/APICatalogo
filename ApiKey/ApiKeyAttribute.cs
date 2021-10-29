@@ -10,7 +10,7 @@ namespace APICatalogo.ApiKey
     [AttributeUsage(validOn: AttributeTargets.Class)]
     public class ApiKeyAttribute : Attribute, IAsyncActionFilter
     {
-        private const string APIKEYNAME = "SR-Midia-Key";
+        private const string APIKEYNAME = "APIKEY";
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             if (!context.HttpContext.Request.Headers.TryGetValue
