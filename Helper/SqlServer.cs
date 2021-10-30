@@ -33,7 +33,7 @@ namespace APICatalogo.Helper
                     if (ex.Number == 53)
                         GetProduct();
                 }
-                using (var sqlCmd = new SqlCommand("SELECT Id, Title, Price FROM [dbo].[Product]", sqlCnn))
+                using (var sqlCmd = new SqlCommand("SELECT Id, Title, Price FROM [dbo].[APICatalogoGabriel]", sqlCnn))
                 {
                     using (var sqlReader = sqlCmd.ExecuteReader())
                     {
@@ -62,7 +62,7 @@ namespace APICatalogo.Helper
                     if (ex.Number == 53)
                         InsertProduct(title, price);
                 }
-                using (var sqlCmd = new SqlCommand("INSERT INTO [dbo].[Product]VALUES(@title, @price)", sqlCnn))
+                using (var sqlCmd = new SqlCommand("INSERT INTO [dbo].[APICatalogoGabriel]VALUES(@title, @price)", sqlCnn))
                 {
                     sqlCmd.Parameters.AddWithValue("@title", title);
                     sqlCmd.Parameters.AddWithValue("@price", price);
@@ -95,7 +95,7 @@ namespace APICatalogo.Helper
                     if (ex.Number == 53)
                         UpdateProduct(title, price, IdProduct);
                 }
-                using (var sqlCmd = new SqlCommand("UPDATE [dbo].[Product] SET Title = @title, Price = @price WHERE Id = @IdProduct", sqlCnn))
+                using (var sqlCmd = new SqlCommand("UPDATE [dbo].[APICatalogoGabriel] SET Title = @title, Price = @price WHERE Id = @IdProduct", sqlCnn))
                 {
                     sqlCmd.Parameters.AddWithValue("@title", title);
                     sqlCmd.Parameters.AddWithValue("@price", price);
@@ -129,7 +129,7 @@ namespace APICatalogo.Helper
                     if (ex.Number == 53)
                         DeleteProduct(IdProduct);
                 }
-                using (var sqlCmd = new SqlCommand("DELETE FROM [dbo].[Product] WHERE Id = @IdProduct", sqlCnn))
+                using (var sqlCmd = new SqlCommand("DELETE FROM [dbo].[APICatalogoGabriel] WHERE Id = @IdProduct", sqlCnn))
                 {
                     sqlCmd.Parameters.AddWithValue("@IdProduct", IdProduct);
 
