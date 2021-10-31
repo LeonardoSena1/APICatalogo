@@ -19,11 +19,11 @@ namespace APICatalogo.ValidatorModels
                 .NotNull()
                 .WithMessage("Price não pode ser null e vazio.");
 
-            RuleFor(a => a.IdProduct)
-               .NotEmpty()
-               .WithMessage("IdProduct não pode ser vazio.")
-               .NotNull()
-               .WithMessage("IdProduct não pode ser null.");
+            //RuleFor(a => a.IdProduct)
+            //   .NotEmpty()
+            //   .WithMessage("IdProduct não pode ser vazio.")
+            //   .NotNull()
+            //   .WithMessage("IdProduct não pode ser null.");
         }
     }
 }

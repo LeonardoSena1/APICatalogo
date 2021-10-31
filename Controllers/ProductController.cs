@@ -10,7 +10,7 @@ namespace APICatalogo.Controllers
 {
     [ApiKey]
     [ApiController]
-    [Route("[controller]/v1/api")] 
+    [Route("[controller]/v1/api")]
     public class ProductController : ControllerBase
     {
         [HttpGet]
@@ -38,7 +38,7 @@ namespace APICatalogo.Controllers
 
             SqlServer.InsertProduct(model.Title, model.Price);
 
-            return Ok("Produto inserido");
+            return Ok();
         }
 
         [HttpPut]
@@ -60,7 +60,7 @@ namespace APICatalogo.Controllers
 
             SqlServer.UpdateProduct(model.Title, model.Price, model.IdProduct);
 
-            return Ok("Produto Atualizado");
+            return Ok();
         }
 
         [HttpDelete]
@@ -82,7 +82,7 @@ namespace APICatalogo.Controllers
 
             SqlServer.DeleteProduct(model.IdProduct);
 
-            return Ok("Produto Deletado");
+            return Ok();
         }
     }
 }
