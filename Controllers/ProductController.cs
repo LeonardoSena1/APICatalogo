@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace APICatalogo.Controllers
 {
-    [ApiKey]
+    //[ApiKey]
     [ApiController]
     [Route("[controller]/v1/api")]
     public class ProductController : ControllerBase
@@ -83,6 +83,18 @@ namespace APICatalogo.Controllers
             SqlServer.DeleteProduct(model.IdProduct);
 
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("idproduct/{id}")]
+        public async Task<ActionResult<List<ProductModel>>> GetByIdProduct(int Id)
+        {
+            if (Id > 0)
+            {
+                return Ok(JsonConvert.SerializeObject(SqlServer.GetProductById(Id)));
+            }
+
+            return BadRequest();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace APICatalogo.Models
 {
     public abstract class Entity
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public bool Valid { get; private set; }
         public bool Invalid => !Valid;
         public ValidationResult ValidationResult { get; private set; }

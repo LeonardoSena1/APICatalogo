@@ -13,7 +13,7 @@ namespace APICatalogo.Models.Product
     {
         public Product(string title, decimal price, int idProduct)
         {
-            Id = Guid.NewGuid();
+            Id = idProduct;
             this.Title = title;
             this.Price = price;
             this.IdProduct = idProduct;

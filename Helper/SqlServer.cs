@@ -82,6 +82,42 @@ namespace APICatalogo.Helper
 
         }
 
+        public static GetByIdProduct GetProductById(int id)
+        {
+            var model = new GetByIdProduct();
+
+            using (var sqlCnn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    sqlCnn.Open();
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 53)
+                        GetProductById(id);
+                }
+                using (var sqlCmd = new SqlCommand("SELECT Id, Title, Price FROM [dbo].[APICatalogoGabriel] Where Id = @id", sqlCnn))
+                {
+                    sqlCmd.Parameters.AddWithValue("@id", id);
+
+                    using (var sqlReader = sqlCmd.ExecuteReader())
+                    {
+                        while (sqlReader.Read())
+                        {
+                            model.Title = (string)sqlReader["Title"];
+                            model.Price = (decimal)sqlReader["Price"];
+                            model.Id = (int)sqlReader["Id"];
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return model;
+        }
+
         public static void UpdateProduct(string title, decimal price, int IdProduct)
         {
             using (var sqlCnn = new SqlConnection(ConnectionString))
