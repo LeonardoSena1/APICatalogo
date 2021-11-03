@@ -58,7 +58,7 @@ namespace APICatalogo.Controllers
                 return BadRequest(JsonConvert.SerializeObject(retorno));
             }
 
-            SqlServer.UpdateProduct(model.Title, model.Price, model.IdProduct);
+            SqlServer.UpdateProduct(model.Title, model.Price, model.Id);
 
             return Ok();
         }

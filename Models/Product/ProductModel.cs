@@ -16,7 +16,6 @@ namespace APICatalogo.Models.Product
             Id = idProduct;
             this.Title = title;
             this.Price = price;
-            this.IdProduct = idProduct;
 
             Validate(this, new ValidatorProduct());
         }
