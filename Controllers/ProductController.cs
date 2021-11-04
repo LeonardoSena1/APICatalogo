@@ -64,23 +64,11 @@ namespace APICatalogo.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult<List<ProductModel>>> DelteProduct([FromBody] Product model)
+        [Route("delete/{id}")]
+        public async Task<ActionResult<List<ProductModel>>> DelteProduct(int id)
         {
-            //Valida erro Json
-            if (model.Invalid)
-            {
-                //Insert errorMenssage in List
-                var ret = new List<string>();
-                model.ValidationResult.Errors.ForEach(x => ret.Add(x.ErrorMessage));
 
-                //Join in list errormenssage
-                var retorno = new Dictionary<string, string>();
-                retorno.Add("Erro: ", string.Join(", ", ret));
-
-                return BadRequest(JsonConvert.SerializeObject(retorno));
-            }
-
-            SqlServer.DeleteProduct(model.IdProduct);
+            SqlServer.DeleteProduct(id);
 
             return Ok();
         }
